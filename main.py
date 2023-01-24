@@ -7,6 +7,7 @@ from pathlib import Path
 
 def main():
     to_do_list = load_task()
+    print(to_do_list)
     command, value = read_args()
     execute_command(command, value)
     save_task(to_do_list, JSONFileStorage(Path.cwd() / "data_file.json"))
