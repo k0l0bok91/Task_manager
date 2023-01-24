@@ -24,9 +24,3 @@ def generate_id(to_do_list) -> str:
     return str(1 + len(to_do_list))
 
 
-def add_task(to_do_list, value):
-    command, value = read_args()
-    i = generate_id(to_do_list)
-    to_do_list[i] = value
-    return to_do_list
-

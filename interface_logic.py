@@ -1,5 +1,5 @@
 import sys
-from dict_logic import add_task, delete_task
+from dict_logic import generate_id, delete_task
 from storage import load_task
 
 
@@ -35,3 +35,10 @@ def print_help():
 <save>--Сохранить задачи
 <dlt>--Пометить выполненой
 <quit>--Для выхода''')
+
+    def add_task(to_do_list, value):
+        command, value = read_args()
+        i = generate_id(to_do_list)
+        to_do_list[i] = value
+        return to_do_list
+
