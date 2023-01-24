@@ -1,5 +1,6 @@
 import sys
-from dict_logic import add_task, delete_task, _to_do_list
+from dict_logic import add_task, delete_task
+from storage import load_task
 
 
 def read_args():
@@ -24,16 +25,13 @@ def execute_command(command, value):
 
 
 def show_tasks():
-    print(_to_do_list.items())
+    print(load_task().items())
 
 
 def print_help():
-        print('''
+    print('''
 <show>--Глянуть одним глазком
 <add>--Добавить задачи
 <save>--Сохранить задачи
 <dlt>--Пометить выполненой
 <quit>--Для выхода''')
-
-
-print_help()
