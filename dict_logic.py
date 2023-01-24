@@ -1,5 +1,5 @@
 from typing import TypedDict
-# from interface_logic import read_args
+from interface_logic import read_args
 
 
 class ToDoList(TypedDict):
@@ -20,12 +20,13 @@ def delete_task(to_do_list: dict, task_id: int) -> None:
     del to_do_list[task_id]
 
 
-def generate_id(to_do_list) -> int:
-    return 1 + len(to_do_list)
+def generate_id(to_do_list) -> str:
+    return str(1 + len(to_do_list))
 
 
-def add_task(value: str):
-    pass
-    # return[generate_id()] = read_args()
-
+def add_task(to_do_list, value):
+    command, value = read_args()
+    i = generate_id(to_do_list)
+    to_do_list[i] = value
+    return to_do_list
 

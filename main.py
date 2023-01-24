@@ -13,5 +13,6 @@ def main():
     save_task(to_do_list, JSONFileStorage(Path.cwd() / "data_file.json"))
 
 
-if __name__ == "__main.py__":
-    main()
+# if __name__ == "__main.py__":
+#     main()
+main()
