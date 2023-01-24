@@ -1,5 +1,7 @@
 from typing import TypedDict
 from interface_logic import read_args
+
+
 class ToDoList(TypedDict):
     T: str
 # def create_new_dict() -> ToDoList:
