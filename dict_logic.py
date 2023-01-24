@@ -1,28 +1,28 @@
+from typing import TypedDict
+from interface_logic import read_args
+class ToDoList(TypedDict):
+    T: str
+def create_new_dict() -> ToDoList:
+   return new_dict.ToDoList = {
 
-# from interface_logic import value
-class ToDoList:
-    def __init__(self):
-        key: int
-        value: str
-        new_dict = {key: value}
+   }
 
 
-    def create(self) -> dict:
-        to_do_list = {
-
+def create() -> dict:
+       to_do_list = {
         }
-        return to_do_list
+       return to_do_list
 
 
-    def delete(self, task_id: int):
-        del self[task_id]
+def delete(to_do_list: dict, task_id: int) -> None:
+    del to_do_list[task_id]
 
 
-    def generate_id(to_do_list) -> int:
-        return 1 + len(_to_do_list)
+def generate_id(to_do_list) -> int:
+    return 1 + len(to_do_list)
 
 
-    def add_task(value: str, to_do_list):
-        [self.generate_id()] = value
-        return
+def add_task(value: str):
+    return[generate_id()] = read_args()
+
 
