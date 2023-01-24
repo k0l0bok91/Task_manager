@@ -2,13 +2,13 @@ from typing import TypedDict
 from interface_logic import read_args
 class ToDoList(TypedDict):
     T: str
-def create_new_dict() -> ToDoList:
-   return new_dict.ToDoList = {
+# def create_new_dict() -> ToDoList:
+#    return new_dict.ToDoList = {
+#
+#    }
 
-   }
 
-
-def create() -> dict:
+def create_dict() -> dict:
        to_do_list = {
         }
        return to_do_list
@@ -23,6 +23,7 @@ def generate_id(to_do_list) -> int:
 
 
 def add_task(value: str):
-    return[generate_id()] = read_args()
+    pass
+    # return[generate_id()] = read_args()
 
 

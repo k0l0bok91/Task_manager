@@ -48,10 +48,11 @@ def load_task() -> dict:
     """load to_do_list in the storage"""
     return JSONFileStorage.load_file(JSONFileStorage(Path.cwd() / "data_file.json"))
 
-save_task(
-    to_do_list,
-    JSONFileStorage(Path.cwd() / "data_file.json")
-)
+
+# save_task(
+#     to_do_list,
+#     JSONFileStorage(Path.cwd() / "data_file.json")
+# )
 #
 # class CSVFileStorage:
 #     """Storage task in CSV file"""

@@ -1,16 +1,22 @@
-import sys
+from interface_logic import read_args, execute_command
+from storage import save_task, load_task
+from dict_logic import create_dict
+# to_do_list = {1:'first',2:'second',3:'third',4:'Four',5:'five',6:'six'}
 
-to_do_list = {1:'first',2:'second',3:'third',4:'Four',5:'five',6:'six'}
+
 def main():
-    # load()
+    try:
+        load_task()
 
+    except:
+        create_dict()
     command, value = read_args()
     execute_command(command, value)
 
-    # save()
+    save_task()
 
 
-if __name__ == main:
+if __name__ == "__main.py__":
     main()
 
 # def delete_task(task_id):
