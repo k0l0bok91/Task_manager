@@ -14,21 +14,23 @@ def finder_goal(numbers: list, goal: int) -> None:
         current_index += 1
 
 
-finder_goal(numbers, goal)
+# finder_goal(numbers, goal)
 
 
-def finder_goal_1(numbers: list, goal: int) -> None:
+def finder_goal_1(numbers: list, goal: int):
     for index, number in enumerate(numbers):
         print(index, number)
-        summ_of_element = number + numbers[index + 1]
-        if summ_of_element == goal:
-            print(number, numbers[index])
+           summ_of_element = number +         numbers[index]
+           if summ_of_element == goal and number !=numbers[index]
+              return (number, numbers[index])
+            else:
+             return  print('пары чисел удовлетворяющих условию нет!')
     #     next_index += 1
     # else:
     #     current_index += 1
 
 
-finder_goal_1(numbers, goal)
+print(finder_goal_1(numbers, goal))
 
 # def finder_goal(numbers: list, goal: int):
 #     for i in range(len(numbers)-1):
