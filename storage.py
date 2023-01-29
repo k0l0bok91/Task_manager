@@ -8,22 +8,22 @@ class Storage:
         self._jsonfile = jsonfile
         self._init_storage()
 
-    def save_file(self, to_do_list) -> None:
+    def save_file(self,to_do_list) -> None:
         with open("data_file.json", "w") as write_file:
             json.dump(to_do_list, write_file)
 
     def _init_storage(self) -> None:
         if not self._jsonfile.exists():
-            self._jsonfile.write_text('[]')
+            self._jsonfile.write_text('{}')
 
     def load_file(self) -> dict:
         with open(self._jsonfile, 'r') as f:
             return json.load(f)
 
 
-def save_task(to_do_list, storage) -> None:
+def save_task(_to_do_list):
     """save to_do_list in the storage"""
-    storage.save_file(to_do_list)
+    Storage.save_file(_to_do_list)
 
 
 def load_task() -> dict:
@@ -33,9 +33,3 @@ def load_task() -> dict:
 
 def delete_task(to_do_list: dict, task_id: int) -> None:
     del to_do_list[task_id]
-
-
-def generate_id(to_do_list) -> str:
-    return str(1 + len(to_do_list))
-
-

@@ -1,5 +1,5 @@
 import sys
-from storage import generate_id, delete_task, load_task, add_task
+from storage import delete_task, load_task, save_task
 
 
 def read_args():
@@ -24,7 +24,7 @@ def execute_command(command, value):
 
 
 def show_tasks():
-    print(load_task().items())
+    print(load_task())
 
 
 def print_help():
@@ -35,9 +35,17 @@ def print_help():
 <dlt>--Пометить выполненой
 <quit>--Для выхода''')
 
-    def add_task(to_do_list, value):
-        command, value = read_args()
-        i = generate_id(to_do_list)
-        to_do_list[i] = value
-        return to_do_list
+
+def generate_id(to_do_list):
+    return 1 + len(to_do_list)
+
+
+def add_task(value):
+    to_do_list = load_task()
+    _, value = read_args()
+    i = generate_id(to_do_list)
+    to_do_list[i] = value
+    save_task(to_do_list)
+    print(to_do_list)
+    return to_do_list
 
