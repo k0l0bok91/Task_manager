@@ -1,26 +1,8 @@
 from pathlib import Path
 import json
-# import csv
-from typing import Protocol
-# from dict_logic import ToDoList
-
-to_do_list = {
-    1: 'first',
-    2: 'second',
-    3: 'third',
-    4: 'Four',
-    5: 'five',
-    6: 'six'
-}
 
 
-class Storage(Protocol):
-    """Interface for any storage saving task"""
-    def save(self, to_do_list) -> None:
-        raise NotImplementedError
-
-
-class JSONFileStorage:
+class Storage:
     """Storage in JSON file"""
     def __init__(self, jsonfile: Path):
         self._jsonfile = jsonfile
@@ -46,17 +28,14 @@ def save_task(to_do_list, storage) -> None:
 
 def load_task() -> dict:
     """load to_do_list in the storage"""
-    return JSONFileStorage.load_file(JSONFileStorage(Path.cwd() / "data_file.json"))
-#
-#
-# class CSVFileStorage:
-#     """Storage task in CSV file"""
-#     def __init__(self, csvfile: Path):
-#         self._csvfile = csvfile
-#
-#     def save_file(self, to_do_list) -> None:
-#         with open(self._csvfile, "w") as file:
-#             writer = csv.writer(file)
-#             writer.writerows(to_do_list)
+    return Storage.load_file(Storage(Path.cwd() / "data_file.json"))
+
+
+def delete_task(to_do_list: dict, task_id: int) -> None:
+    del to_do_list[task_id]
+
+
+def generate_id(to_do_list) -> str:
+    return str(1 + len(to_do_list))
 
 

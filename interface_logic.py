@@ -1,6 +1,5 @@
 import sys
-from dict_logic import generate_id, delete_task
-from storage import load_task
+from storage import generate_id, delete_task, load_task, add_task
 
 
 def read_args():
