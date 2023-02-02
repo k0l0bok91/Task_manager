@@ -40,7 +40,7 @@ def generate_id(to_do_list):
     return 1 + len(to_do_list)
 
 
-def add_task(value):
+def add_task():
     to_do_list = load_task()
     _, value = read_args()
     i = generate_id(to_do_list)
