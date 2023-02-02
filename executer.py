@@ -45,7 +45,9 @@ def add_task(value):
     to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
     _, value = read_args()
     i = generate_id(to_do_list)
-    Storage.save_file(to_do_list)
+    new_task = {i: value}
+    new_to_do_list = to_do_list | new_task
+    Storage.save_file(new_to_do_list)
     show_tasks()
     return to_do_list
 
