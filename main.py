@@ -7,7 +7,7 @@ def main():
     to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
     command, value = read_args()
     execute_command(command, value)
-    Storage.save_task(to_do_list)
+    Storage.save_file(to_do_list)
 
 
 main()

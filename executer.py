@@ -1,5 +1,6 @@
+from pathlib import Path
 import sys
-from storage import delete_task, load_task, save_task
+from storage import Storage
 
 
 def read_args():
@@ -24,7 +25,7 @@ def execute_command(command, value):
 
 
 def show_tasks():
-    print(load_task())
+    print(Storage.load_file())
 
 
 def print_help():
@@ -41,11 +42,14 @@ def generate_id(to_do_list):
 
 
 def add_task(value):
-    to_do_list = load_task()
+    to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
     _, value = read_args()
     i = generate_id(to_do_list)
     to_do_list[i] = value
-    save_task(to_do_list)
+    Storage.save_file(to_do_list)
     print(to_do_list)
     return to_do_list
 
+
+def delete_task(to_do_list, task_id):
+    del to_do_list[task_id]
