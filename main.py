@@ -1,12 +1,13 @@
 from executer import read_args, execute_command
-from storage import save_task, load_task
+from storage import Storage
+from pathlib import Path
 
 
 def main():
-    to_do_list = load_task()
+    to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
     command, value = read_args()
     execute_command(command, value)
-    save_task(to_do_list)
+    Storage.save_task(to_do_list)
 
 
 main()
