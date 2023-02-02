@@ -7,7 +7,7 @@ def read_args():
     argv = sys.argv
     if len(argv) < 3:
         argv.append('')
-    [_, cmd, *value] = argv
+    _, cmd, *value = argv
     return cmd, value
 
 
@@ -25,7 +25,7 @@ def execute_command(command, value):
 
 
 def show_tasks():
-    print(Storage.load_file())
+    print(Storage.load_file(Storage(Path.cwd() / "data_file.json")))
 
 
 def print_help():
@@ -46,8 +46,9 @@ def add_task(value):
     _, value = read_args()
     i = generate_id(to_do_list)
     to_do_list[i] = value
+    print(value)
     Storage.save_file(to_do_list)
-    print(to_do_list)
+    show_tasks()
     return to_do_list
 
 
