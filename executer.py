@@ -57,8 +57,7 @@ def add_task():
 
 def delete_task(value):
     to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
-    task_id = str("".join(map(str, value)))
-    print(type(task_id))
+    task_id = "".join(value)
     del to_do_list[task_id]
     Storage.save_file(to_do_list)
     show_tasks()
