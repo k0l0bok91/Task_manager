@@ -1,6 +1,7 @@
 from pathlib import Path
 import sys
 from storage import Storage
+from tabulate import tabulate
 
 
 def read_args():
@@ -15,9 +16,9 @@ def execute_command(command, value):
     if command == 'show':
         show_tasks()
     elif command == 'add':
-        add_task(value)
+        add_task()
     elif command == 'done':
-        delete_task(int(value))
+        delete_task(value)
     elif command == 'help':
         print_help()
     else:
@@ -25,15 +26,18 @@ def execute_command(command, value):
 
 
 def show_tasks():
-    print(Storage.load_file(Storage(Path.cwd() / "data_file.json")))
+    to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
+    if to_do_list == {}:
+        print('Невыполненных задач пока нет. Хорошая работа!')
+    else:
+        print(tabulate(to_do_list.items(), headers=['ID', 'Задача'], tablefmt="grid"))
 
 
 def print_help():
     print('''
 <show>--Глянуть одним глазком
 <add>--Добавить задачи
-<save>--Сохранить задачи
-<dlt>--Пометить выполненой
+<done>--Пометить выполненой
 <quit>--Для выхода''')
 
 
@@ -41,7 +45,7 @@ def generate_id(to_do_list):
     return 1 + len(to_do_list)
 
 
-def add_task(value):
+def add_task():
     to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
     _, value = read_args()
     i = generate_id(to_do_list)
@@ -52,5 +56,6 @@ def add_task(value):
     return to_do_list
 
 
-def delete_task(to_do_list, task_id):
-    del to_do_list[task_id]
+def delete_task(value):
+    to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
+    del to_do_list[int(value)]
