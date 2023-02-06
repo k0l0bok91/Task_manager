@@ -11,18 +11,21 @@ def read_args():
     _, cmd, *value = argv
     return cmd, value
 
-
-def execute_command(command, value):
-    if command == 'show':
-        show_tasks()
-    elif command == 'add':
-        add_task()
-    elif command == 'done':
-        delete_task(value)
-    elif command == 'help':
-        print_help()
-    else:
-        print("Неправильно, Андрей! Широкую, на Широкую")
+class Executer():
+    def __init__ (self, storage):
+        self.storage = storage
+    
+    def execute_command(command, value):
+        if command == 'show':
+            show_tasks()
+        elif command == 'add':
+            add_task()
+        elif command == 'done':
+            delete_task(value)
+        elif command == 'help':
+            print_help()
+        else:
+            print("Неправильно, Андрей! Широкую, на Широкую")
 
 
 def show_tasks():
