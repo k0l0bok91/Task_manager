@@ -6,4 +6,5 @@ def main():
     execute_command(command, value)
 
 
-main()
+if __name__ == '__main__':
+    main()

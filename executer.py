@@ -2,6 +2,7 @@ from pathlib import Path
 import sys
 from storage import Storage
 from tabulate import tabulate
+from functools import wraps
 
 
 def read_args():
@@ -11,21 +12,18 @@ def read_args():
     _, cmd, *value = argv
     return cmd, value
 
-class Executer():
-    def __init__ (self, storage):
-        self.storage = storage
-    
-    def execute_command(command, value):
-        if command == 'show':
-            show_tasks()
-        elif command == 'add':
-            add_task()
-        elif command == 'done':
-            delete_task(value)
-        elif command == 'help':
-            print_help()
-        else:
-            print("Неправильно, Андрей! Широкую, на Широкую")
+
+def execute_command(command, value):
+    if command == 'show':
+        show_tasks()
+    elif command == 'add':
+        add_task()
+    elif command == 'done':
+        delete_task(value)
+    elif command == 'help':
+        print_help()
+    else:
+        print("Для справки воспользуйтесь командой help")
 
 
 def show_tasks():
@@ -33,7 +31,7 @@ def show_tasks():
     if to_do_list == {}:
         print('Невыполненных задач пока нет. Хорошая работа!')
     else:
-        print(tabulate(to_do_list.items(), headers=['ID', 'Задача'], tablefmt="grid"))
+        print(tabulate(to_do_list.items(), headers=['ID', 'Невыполненные задачи'], tablefmt="grid"))
 
 
 def print_help():
@@ -41,26 +39,38 @@ def print_help():
 <show>--Глянуть одним глазком
 <add>--Добавить задачи
 <done>--Пометить выполненой
-<quit>--Для выхода''')
+        ''')
 
 
 def generate_id(to_do_list):
     return 1 + len(to_do_list)
 
 
+def save_and_show(func):
+    @wraps(func)
+    def inner(*args, **kwargs):
+        func(*args, **kwargs)
+        Storage.save_file(func(*args, **kwargs))
+        show_tasks()
+
+    return inner
+
+
+@save_and_show
 def add_task():
+    """Добавляет новую задачу в конец словаря"""
     to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
     _, value = read_args()
     i = generate_id(to_do_list)
     new_task = {i: " ".join(value)}
-    new_to_do_list = to_do_list | new_task
-    Storage.save_file(new_to_do_list)
-    show_tasks()
+    to_do_list = to_do_list | new_task
+    return to_do_list
 
 
+@save_and_show
 def delete_task(value):
+    """Удаляет завершенную задачу по ключу ID"""
     to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
     task_id = "".join(value)
     del to_do_list[task_id]
-    Storage.save_file(to_do_list)
-    show_tasks()
+    return to_do_list

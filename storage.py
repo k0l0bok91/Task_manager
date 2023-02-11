@@ -2,12 +2,12 @@ import json
 
 
 class Storage:
-    """Storage in JSON file"""
     def __init__(self, jsonfile):
         self._jsonfile = jsonfile
         self._init_storage()
 
     def save_file(self):
+        """Сериализация в JSON файл"""
         with open("data_file.json", "w") as write_file:
             json.dump(self, write_file)
 
@@ -16,5 +16,6 @@ class Storage:
             self._jsonfile.write_text('{}')
 
     def load_file(self):
+        """Десериализация из JSON файла"""
         with open(self._jsonfile, 'r') as file:
             return json.load(file)
