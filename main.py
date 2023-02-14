@@ -8,3 +8,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+new_line = "Новая линия"
