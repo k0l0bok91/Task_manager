@@ -64,7 +64,7 @@ def save_and_show(func):
 
 @save_and_show
 def add_task():
-    """Добавляет новую задачу в конец словаря"""
+    """ Добавляет новую задачу в конец словаря """
     to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
     _, value = read_args()
     i = generate_id(to_do_list)
