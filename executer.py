@@ -43,7 +43,13 @@ def print_help():
 
 
 def generate_id(to_do_list):
-    return 1 + len(to_do_list)
+    """Генерирует уникальный ID задачи"""
+    if to_do_list == {}:
+        return f'{1:03}'
+    else:
+        int_key = [int(key) for key in to_do_list.keys()]
+        new_id = max(int_key) + 1
+        return f'{new_id:03}'
 
 
 def save_and_show(func):
