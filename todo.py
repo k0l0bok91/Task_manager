@@ -1,3 +1,4 @@
+#!/usr/bin/env python3.10
 from executer import read_args, execute_command
 
 
