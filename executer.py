@@ -1,6 +1,6 @@
 from pathlib import Path
 import sys
-from storage import Storage
+from storage import JSONStorage
 from tabulate import tabulate
 from functools import wraps
 
@@ -27,7 +27,7 @@ def execute_command(command, value):
 
 
 def show_tasks():
-    to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
+    to_do_list = JSONStorage.load_file(JSONStorage(Path.cwd() / "data_file.json"))
     if to_do_list == {}:
         print('Невыполненных задач пока нет. Хорошая работа!')
     else:
@@ -56,7 +56,7 @@ def save_and_show(func):
     @wraps(func)
     def inner(*args, **kwargs):
         func(*args, **kwargs)
-        Storage.save_file(func(*args, **kwargs))
+        JSONStorage.save_file(func(*args, **kwargs))
         show_tasks()
 
     return inner
@@ -65,7 +65,7 @@ def save_and_show(func):
 @save_and_show
 def add_task():
     """ Добавляет новую задачу в конец словаря """
-    to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
+    to_do_list = JSONStorage.load_file(JSONStorage(Path.cwd() / "data_file.json"))
     _, value = read_args()
     i = generate_id(to_do_list)
     new_task = {i: " ".join(value)}
@@ -76,7 +76,7 @@ def add_task():
 @save_and_show
 def delete_task(value):
     """Удаляет завершенную задачу по ключу ID"""
-    to_do_list = Storage.load_file(Storage(Path.cwd() / "data_file.json"))
+    to_do_list = JSONStorage.load_file(JSONStorage(Path.cwd() / "data_file.json"))
     task_id = "".join(value)
     del to_do_list[task_id]
     return to_do_list

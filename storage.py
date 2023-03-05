@@ -1,7 +1,8 @@
 import json
+import sqlite3
 
-
-class Storage:
+class JSONStorage:
+    """ Класс для сохранения в JSON файле"""
     def __init__(self, jsonfile):
         self._jsonfile = jsonfile
         self._init_storage()
@@ -19,3 +20,17 @@ class Storage:
         """Десериализация из JSON файла"""
         with open(self._jsonfile, 'r') as file:
             return json.load(file)
+
+class DataBaseStorage:
+    """ Класс для сохранения в базе данных"""
+    def __init__(self):
+        db = sqlite3.connect("data_base.db")
+        cursor = db.cursor()
+
+        cursor.execute("""CREATE TABLE IF NOT EXISTS to_do_list(
+            id INTEGER,
+            task TEXT
+                )""")
+        db.commit()
+
+        db.close()
