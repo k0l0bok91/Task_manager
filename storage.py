@@ -32,5 +32,4 @@ class DataBaseStorage:
             task TEXT
                 )""")
         db.commit()
-
         db.close()
