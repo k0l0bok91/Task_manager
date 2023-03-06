@@ -5,7 +5,7 @@ from functools import wraps
 class DataBaseStorage:
     """ Класс для сохранения в базе данных"""
     def __init__(self):
-        self._init_db()
+        self._create_db()
         self.db = sqlite3.connect("data_base.db")
         self.cursor = db.cursor()
 
@@ -13,12 +13,12 @@ class DataBaseStorage:
         @wraps(func)
         def inner(*args, **kwargs):
             func(*args, **kwargs)
-            db.commit()
-            db.close()
+            self.db.commit()
+            self.db.close()
         return inner
 
     @commit_and_close
-    def _init_db(self):
+    def _create_db(self):
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS to_do_list(
             id INTEGER,
             task TEXT
