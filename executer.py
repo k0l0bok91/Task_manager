@@ -14,16 +14,17 @@ def read_args():
 
 
 def execute_command(command, value):
-    if command == 'show':
-        show_tasks()
-    elif command == 'add':
-        add_task()
-    elif command == 'done':
-        delete_task(value)
-    elif command == 'help':
-        print_help()
-    else:
-        print("Для справки воспользуйтесь командой help")
+    match command:
+        case 'show':
+            show_tasks()
+        case 'add':
+            add_task()
+        case 'done':
+            delete_task(value)
+        case 'help':
+            print_help()
+        case _:
+            print("Для справки воспользуйтесь командой help")
 
 
 def show_tasks():
