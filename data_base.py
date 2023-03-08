@@ -2,31 +2,33 @@ import sqlite3
 import json
 from functools import wraps
 
+
+
+
 class DataBaseStorage:
-    """ Класс для сохранения в базе данных"""
-    def __init__(self):
+    """ Класс для сохранения словаря в базе данных"""
+    def __init__(self, db, cursor):
         self._create_db()
-        self.db = sqlite3.connect("data_base.db")
-        self.cursor = db.cursor()
+        db = sqlite3.connect("data_base.db")
+        cursor = db.cursor()
+        # self.db = db
+        # self.cursor = cursor
 
-    def commit_and_close(func):
-        @wraps(func)
-        def inner(*args, **kwargs):
-            func(*args, **kwargs)
-            self.db.commit()
-            self.db.close()
-        return inner
+    def _commit_and_close(self):
+        db.commit()
+        db.close()
 
-    @commit_and_close
     def _create_db(self):
-        self.cursor.execute("""CREATE TABLE IF NOT EXISTS to_do_list(
+        cursor.execute("""CREATE TABLE IF NOT EXISTS to_do_list(
             id INTEGER,
             task TEXT
                 )""")
+        self._commit_and_close()
 
-    @commit_and_close
     def add_task(self):
+        db = sqlite3.connect("data_base.db")
+        cursor.execute("INSERT INTO to_do_list VALUES('01', 'test')")
+        self._commit_and_close()
 
-        self.cursor.execute("INSERT INTO to_do_list VALUES('01', 'test')")
-
-DataBaseStorage.add_task(self)
+db_storage = DataBaseStorage(db, cursor)
+db_storage.add_task()
