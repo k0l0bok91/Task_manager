@@ -1,5 +1,5 @@
 import unittest
-from executer import *..
+from executer import *
 
 
 class TetsExecuter(unittest.TestCase):
