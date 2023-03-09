@@ -9,3 +9,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+#  создаем объект класса Command
+# передаем его в класc Executer
