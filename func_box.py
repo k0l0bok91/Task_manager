@@ -1,10 +1,10 @@
 from storage import JSONStorage
 from pathlib import Path
 from tabulate import tabulate
-from command import Command
+# from command import Command
 
 to_do_list = JSONStorage.load_file(JSONStorage(Path.cwd() / "data_file.json"))
-command = Command(cmd)
+# command = Command(cmd)
 
 class FuncBox():
     """Функции работы приложения"""
@@ -13,12 +13,12 @@ class FuncBox():
         self.command = command
         self.value = value
 
-    def _generate_id(self):
+    def _generate_id(self, to_do_list):
         """Генерирует уникальный ID задачи"""
-        if self.to_do_list == {}:
+        if to_do_list == {}:
             return f'{1:02}'
         else:
-            int_key = [int(key) for key in self.to_do_list.keys()]
+            int_key = [int(key) for key in to_do_list.keys()]
             new_id = max(int_key) + 1
             return f'{new_id:02}'
 
@@ -46,6 +46,6 @@ class FuncBox():
         ''')
 
 
-test_case = FuncBox(to_do_list)
+# test_case = FuncBox(to_do_list)
 
-test_case.show_tasks()
+# test_case.show_tasks()
