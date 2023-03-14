@@ -5,7 +5,7 @@ from tabulate import tabulate
 from functools import wraps
 
 
-def read_args():
+def read_args()->tuple:
     argv = sys.argv
     if len(argv) < 3:
         argv.append('')
